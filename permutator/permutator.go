@@ -1,5 +1,10 @@
 package permutator
 
+import (
+	"errors"
+	"reflect"
+)
+
 // factorial returns factorial of n
 func factorial(n int) (result int) {
 	if n > 0 {
@@ -54,4 +59,18 @@ func GetPermutationChannel(s []interface{}) <-chan []interface{} {
 		}
 	}()
 	return rc
+}
+
+func toInterfaceSlice(s interface{}) ([]interface{}, error) {
+	v := reflect.ValueOf(s)
+	switch v.Kind() {
+	case reflect.Slice:
+		r := make([]interface{}, v.Len())
+		for i := 0; i < v.Len(); i++ {
+			r[i] = v.Index(i).Interface()
+		}
+		return r, nil
+	default:
+		return nil, errors.New("Input was not a slice!")
+	}
 }
