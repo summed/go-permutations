@@ -14,6 +14,11 @@ func factorial(n int) (result int) {
 	return 1
 }
 
+// GetPermutationChannelSize used to 'predict' the channel "length" of GetPermutationChannel
+func GetPermutationChannelSize(orgSliceLength int) int {
+	return factorial(orgSliceLength)
+}
+
 // getCopyOfSliceWithoutElemAt returns a slice continating the input elements of a, except the one at index i
 func getCopyOfSliceWithoutElemAt(a []interface{}, i int) []interface{} {
 	r := make([]interface{}, len(a)-1)
